@@ -2,8 +2,14 @@ var Area = require('./../models/area.model');
 var Search = require('./../models/search.model');
 
 module.exports = {
-    getAllClu: function (req, res) {
-        Area.getAllClu().then(function (data) {
+    getAllCluByStatus: function (req, res) {
+        Area.getCluByStatus(req.params.status).then(function (data) {
+            res.json(data);
+        })
+    },
+
+    getAllParcelByStatus: function (req, res) {
+        Area.getParcelByStatus(req.params.status).then(function (data) {
             res.json(data);
         })
     },

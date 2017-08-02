@@ -248,6 +248,36 @@ module.exports = {
                 })
             })
         })
+    },
+
+    getCluByStatus: function (status) {
+        return new Promise(function (resolve, reject) {
+            connection(function (db) {
+                var fields = listField.enterPriseField();
+                db.collection('clu_bed').find({'sales.Status': status}, {fields: fields}).toArray(function (err, listClu) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(GeoJSON.parse(listClu, {'GeoJSON': 'geometry'}));
+                    }
+                });
+            })
+        })
+    },
+
+    getParcelByStatus: function (status) {
+        return new Promise(function (resolve, reject) {
+            connection(function (db) {
+                var fields = listField.enterPriseField();
+                db.collection('parcel').find({'sales.Status': status}, {fields: fields}).toArray(function (err, listParcel) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(GeoJSON.parse(listParcel, {'GeoJSON': 'geometry'}));
+                    }
+                });
+            })
+        })
     }
 
 }
