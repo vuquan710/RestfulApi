@@ -1,6 +1,13 @@
 module.exports = {
+    nonLoginField: function () {
+        return {
+            "geometry": 1,
+            "type": 1,
+            "sales.Status": 1
+        }
+    },
     freeField: function () {
-        return free = {
+        var free = {
             "sales.Status": 1,
             "sales.Total_Acres": 1,
             "sales.Avg_CSR2": 1,
@@ -16,6 +23,8 @@ module.exports = {
             'sales.Broker_URL': 1,
             'sales.Price_Acre': 1
         };
+
+        return Object.assign(free, this.nonLoginField());
     },
 
     standardField: function () {
