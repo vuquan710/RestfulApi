@@ -14,6 +14,18 @@ module.exports = {
         })
     },
 
+    getAllCluNoLoginByStatus: function (req, res) {
+        Area.getCluNoLoginByStatus(req.params.status).then(function (data) {
+            res.json(data);
+        })
+    },
+
+    getAllParcelNoLoginByStatus: function (req, res) {
+        Area.getParcelNoLoginByStatus(req.params.status).then(function (data) {
+            res.json(data);
+        })
+    },
+
     getAllParcel: function (req, res) {
         Area.getAllParcel().then(function (data) {
             res.json(data);
