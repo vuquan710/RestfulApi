@@ -17,5 +17,11 @@ module.exports = {
     	UserModel.getUploadStatus().then(function (data) {
             res.json(data);
         })
+    },
+
+    getUserProfile: function (req, res) {
+    	UserModel.getUserById(req.params.userId).then(function (data) {
+    		res.json(data);
+    	})
     }
 }
