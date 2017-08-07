@@ -1,6 +1,7 @@
 var Promise = require('promise');
 var GeoJSON = require('geojson');
 var NodeCache = require('node-cache');
+var request = require('request');
 
 var Search = require('./search.model');
 var UserModel = require('./user.model');
@@ -258,7 +259,8 @@ module.exports = {
                     if (err) {
                         reject(err);
                     } else {
-                        resolve(GeoJSON.parse(listClu, {'GeoJSON': 'geometry'}));
+                        // resolve(GeoJSON.parse(listClu, {'GeoJSON': 'geometry'}));
+                        resolve(listClu);
                     }
                 });
             })
@@ -273,7 +275,8 @@ module.exports = {
                     if (err) {
                         reject(err);
                     } else {
-                        resolve(GeoJSON.parse(listParcel, {'GeoJSON': 'geometry'}));
+                        // resolve(GeoJSON.parse(listParcel, {'GeoJSON': 'geometry'}));
+                        resolve(listParcel);
                     }
                 });
             })
@@ -288,7 +291,8 @@ module.exports = {
                     if (err) {
                         reject(err);
                     } else {
-                        resolve(GeoJSON.parse(listClu, {'GeoJSON': 'geometry'}));
+                        // resolve(GeoJSON.parse(listClu, {'GeoJSON': 'geometry'}));
+                        resolve(listClu);
                     }
                 });
             })
@@ -303,10 +307,20 @@ module.exports = {
                     if (err) {
                         reject(err);
                     } else {
-                        resolve(GeoJSON.parse(listParcel, {'GeoJSON': 'geometry'}));
+                        // resolve(GeoJSON.parse(listParcel, {'GeoJSON': 'geometry'}));
+                        resolve(listParcel);
                     }
                 });
             })
+        })
+    },
+
+    getClosestMapFull: function (lat, lng, radius, collection) {
+        return new Promise(function (resolve, reject) {
+            var url = "http://localhost:8092/api/v1/closest_api/" + lng + "/" + lat + "/" + collection + "/" + radius
+            request(url, function (error, response, body) {
+                resolve(body);
+            });
         })
     }
 

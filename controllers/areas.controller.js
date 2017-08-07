@@ -78,8 +78,13 @@ module.exports = {
     },
 
     saveSearchHistory: function (req, res) {
-        console.log(req.body.user);
         Area.saveSearchHistory(req.body.user).then(function (data) {
+            res.json(data);
+        })
+    },
+
+    getClosestMapFull: function (req, res) {
+        Area.getClosestMapFull(req.params.lat, req.params.lng, req.params.radius, req.params.type).then(function (data) {
             res.json(data);
         })
     }

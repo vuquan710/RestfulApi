@@ -159,7 +159,7 @@ module.exports = {
         if ('password' in user['services']) {
             return user.emails[0]['address']
         } else {
-            let type = 'facebook' in user['services'] ? 'facebook' : 'google';
+            var type = 'facebook' in user['services'] ? 'facebook' : 'google';
             return user['services'][type]['email']
         }
     },

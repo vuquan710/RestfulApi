@@ -28,7 +28,7 @@ module.exports = {
                     if ('password' in user['services']) {
                         email = user.emails[0]['address']
                     } else {
-                        let type = 'facebook' in user['services'] ? 'facebook' : 'google';
+                        var type = 'facebook' in user['services'] ? 'facebook' : 'google';
                         email = user['services'][type]['email']
                     }
 

@@ -1,9 +1,12 @@
 module.exports = {
     nonLoginField: function () {
         return {
-            "geometry": 1,
+            // "geometry": 1,
             "type": 1,
-            "sales.Status": 1
+            "sales.Status": 1,
+            "properties.connected": 1,
+            "properties.lat_center": 1,
+            "properties.lng_center": 1
         }
     },
     freeField: function () {
@@ -14,9 +17,6 @@ module.exports = {
             "properties.PIN": 1,
             "properties.CLUID": 1,
             "properties.county": 1,
-            "properties.connected": 1,
-            "properties.lat_center": 1,
-            "properties.lng_center": 1,
             "properties.FIPS": 1,
             "sales.County": 1,
             'properties.county_name': 1,
