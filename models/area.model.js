@@ -260,7 +260,8 @@ module.exports = {
                         reject(err);
                     } else {
                         // resolve(GeoJSON.parse(listClu, {'GeoJSON': 'geometry'}));
-                        resolve(listClu);
+                        // resolve(listClu);
+                        resolve(UtilHelper.groupListSale(listClu));
                     }
                 });
             })
@@ -276,7 +277,8 @@ module.exports = {
                         reject(err);
                     } else {
                         // resolve(GeoJSON.parse(listParcel, {'GeoJSON': 'geometry'}));
-                        resolve(listParcel);
+                        // resolve(listParcel);
+                        resolve(UtilHelper.groupListSale(listParcel));
                     }
                 });
             })
@@ -292,7 +294,8 @@ module.exports = {
                         reject(err);
                     } else {
                         // resolve(GeoJSON.parse(listClu, {'GeoJSON': 'geometry'}));
-                        resolve(listClu);
+                        // resolve(listClu);
+                        resolve(UtilHelper.groupListSale(listClu));
                     }
                 });
             })
@@ -308,7 +311,8 @@ module.exports = {
                         reject(err);
                     } else {
                         // resolve(GeoJSON.parse(listParcel, {'GeoJSON': 'geometry'}));
-                        resolve(listParcel);
+                        // resolve(listParcel);
+                        resolve(UtilHelper.groupListSale(listParcel));
                     }
                 });
             })

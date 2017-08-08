@@ -201,5 +201,57 @@ module.exports = {
         }
 
         return ""
+    },
+
+    groupListSale: function (listSale) {
+        var listConnected = [];
+        listSales = [];
+        var listGroupSales = [];
+        var count = 0;
+        for (var i = 0; i < listSale.length;  i++) {
+            var connected = listSale[i]['properties']['connected'];
+            if (!listGroupSales[JSON.stringify(connected)])
+                listGroupSales[JSON.stringify(connected)] = [];
+            listGroupSales[JSON.stringify(connected)].push({
+                "id": listSale[i]['_id'],
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [listSale[i]['properties']['lng_center'], listSale[i]['properties']['lat_center']]
+                },
+                "properties": listSale[i]['properties'],
+                "sales": listSale[i]['sales'],
+                "lat": listSale[i]['properties']['lat_center'],
+                "lng": listSale[i]['properties']['lng_center']
+            })
+        }
+
+        for (var key in listGroupSales) {
+            if (listGroupSales.hasOwnProperty(key)) {
+                var sumLat = 0;
+                var sumLng = 0;
+                for (var j = 0; j < listGroupSales[key].length; j++) {
+                    sumLat += listGroupSales[key][j]['properties']['lat_center'];
+                    sumLng += listGroupSales[key][j]['properties']['lng_center'];
+                }
+
+                var lng = sumLng / listGroupSales[key].length;
+                var lat = sumLat / listGroupSales[key].length;
+                listSales.push({
+                    "id": listGroupSales[key][0]['id'],
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [lng, lat]
+                    },
+                    "properties": listGroupSales[key][0]['properties'],
+                    "sales": listGroupSales[key][0]['sales'],
+                    "lat": lat,
+                    "lng": lng
+                })
+            }
+        }
+
+        return listSales;
     }
 }
