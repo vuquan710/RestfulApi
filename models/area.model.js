@@ -210,11 +210,11 @@ module.exports = {
             connection(function (db) {
                 var Parcel = db.collection('parcel');
                 var Clu = db.collection('clu_bed');
-                Parcel.find(condition).toArray(function (err, listParcel) {
-                    Clu.find(condition).toArray(function (err, listClu) {
+                Parcel.find(condition, UtilHelper.enterPriseField).toArray(function (err, listParcel) {
+                    Clu.find(condition, UtilHelper.enterPriseField).toArray(function (err, listClu) {
                         var result = {
                             result: listParcel.concat(listClu),
-                            condition: condition
+                            condition: query
                         }
 
                         resolve(result)

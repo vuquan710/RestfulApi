@@ -197,11 +197,15 @@ module.exports = {
     },
 
     insertSearchAdvanced: function (userId, condition) {
-        connection(function (db) {
-            db.collection('search_advanced').insert({
-                user_id: userId,
-                condition: JSON.stringify(condition),
-                time: new Date().getTime()
+        return new Promise(function (resolve, reject) {
+            connection(function (db) {
+                db.collection('search_advanced').insert({
+                    user_id: userId,
+                    condition: JSON.stringify(condition),
+                    time: new Date().getTime()
+                }, function (err, result) {
+                    resolve(result);
+                })
             })
         })
     }
