@@ -239,6 +239,7 @@ module.exports = {
                 var lat = sumLat / listGroupSales[key].length;
                 listSales.push({
                     "id": listGroupSales[key][0]['id'],
+                    "_id": listGroupSales[key][0]['id'],
                     "type": "Feature",
                     "geometry": {
                         "type": "Point",
