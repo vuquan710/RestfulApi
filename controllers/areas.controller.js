@@ -53,11 +53,9 @@ module.exports = {
     searchAdvanced: function (req, res) {
         var query = req.body.query;
         var userId = req.body.userId;
-        Search.insertSearchAdvanced(userId, query).then(function (result) {
-            Area.searchAdvanced(JSON.parse(JSON.stringify(query))).then(function (data) {
-                res.json(data);
-            })
-        });
+        Area.searchAdvanced(query).then(function (data) {
+            res.json(data);
+        })
     },
 
     getAllCounty: function (req, res) {
