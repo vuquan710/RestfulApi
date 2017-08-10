@@ -214,7 +214,7 @@ module.exports = {
                     Clu.find(condition, UtilHelper.enterPriseField).toArray(function (err, listClu) {
                         var result = {
                             result: listParcel.concat(listClu),
-                            condition: query
+                            condition: condition
                         }
 
                         resolve(result)
