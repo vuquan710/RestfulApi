@@ -1,3 +1,5 @@
+var request = require('request');
+
 var Area = require('./../models/area.model');
 var Search = require('./../models/search.model');
 
@@ -53,11 +55,14 @@ module.exports = {
     searchAdvanced: function (req, res) {
         var query = req.body.query;
         var userId = req.body.userId;
-        Search.insertSearchAdvanced(userId, query).then(function (result) {
-            Area.searchAdvanced(JSON.parse(JSON.stringify(query))).then(function (data) {
-                res.json(data);
-            })
-        });
+        // Search.insertSearchAdvanced(userId, query).then(function (result) {
+        //     Area.searchAdvanced(JSON.parse(JSON.stringify(query))).then(function (data) {
+        //         res.json(data);
+        //     })
+        // });
+        Area.searchAdvanced(query).then(function (data) {
+            res.json(data);
+        })
     },
 
     getAllCounty: function (req, res) {
@@ -88,5 +93,16 @@ module.exports = {
         Area.getClosestMapFull(req.params.lat, req.params.lng, req.params.radius, req.params.type).then(function (data) {
             res.json(data);
         })
+    },
+
+    getClosestApiMap: function (req, res) {
+        var lng = req.params.lng;
+        var lat = req.params.lat;
+        var collection = req.params.collection;
+        var radius = req.params.radius;
+        var url = "http://localhost:8091/api/v1/closest_api/" + lng + "/" + lat + "/" + collection + "/" + radius;
+        request(url, function (error, response, body) {
+            res.json(body);
+        });
     }
 }

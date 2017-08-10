@@ -19,4 +19,5 @@ router.get('/get-all-parcel-by-status/:status', AreaController.getAllParcelBySta
 router.get('/get-all-clu-no-login-by-status/:status', AreaController.getAllCluNoLoginByStatus);
 router.get('/get-all-parcel-no-login-by-status/:status', AreaController.getAllParcelNoLoginByStatus);
 router.get('/get-closes-map-full/:lat/:lng/:radius/:type', AreaController.getClosestMapFull);
+router.get('/get-closest-api/:lng/:lat/:collection/:radius', AreaController.getClosestApiMap);
 module.exports = router;
