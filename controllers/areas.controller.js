@@ -99,5 +99,11 @@ module.exports = {
         request(url, function (error, response, body) {
             res.json(body);
         });
+    },
+
+    getAreaById: function (req, res) {
+        Area.getById(req.params.id).then(function (data) {
+            res.json(data);
+        })
     }
 }

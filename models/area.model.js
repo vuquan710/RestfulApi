@@ -2,6 +2,7 @@ var Promise = require('promise');
 var GeoJSON = require('geojson');
 var NodeCache = require('node-cache');
 var request = require('request');
+var ObjectID = require('mongodb').ObjectID;
 
 var Search = require('./search.model');
 var UserModel = require('./user.model');
@@ -213,10 +214,12 @@ module.exports = {
                 Parcel.find(condition, UtilHelper.enterPriseField).toArray(function (err, listParcel) {
                     Clu.find(condition, UtilHelper.enterPriseField).toArray(function (err, listClu) {
                         var result = {
-                            result: listParcel.concat(listClu),
-                            condition: condition
+                            result: UtilHelper.groupListSale(listParcel).concat(UtilHelper.groupListSale(listClu)),
+                            condition: condition,
+                            time: new Date()
                         }
 
+                        console.log("Result search " + result.result.length);
                         resolve(result)
                     })
                 })
@@ -325,6 +328,29 @@ module.exports = {
             request(url, function (error, response, body) {
                 resolve(body);
             });
+        })
+    },
+
+    getById: function (id) {
+        return new Promise(function (resolve, reject) {
+            connection(function (db) {
+                var Clu = db.collection('clu_bed');
+                var Parcel = db.collection('parcel');
+                id = new ObjectID(id);
+                Clu.findOne(id, function (err, clu) {
+                    if (clu) {
+                        Clu.find({'properties.connected': clu.properties.connected}).toArray(function (err, result) {
+                            resolve(result);
+                        })
+                    } else {
+                        Parcel.findOne(id, function (err, parcel) {
+                            Parcel.find({'properties.connected': parcel.properties.connected}).toArray(function (err, result) {
+                                resolve(result);
+                            })
+                        })
+                    }
+                })
+            })
         })
     }
 
